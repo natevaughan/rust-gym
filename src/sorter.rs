@@ -1,9 +1,8 @@
 use std::env;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let mut mut_args = args.to_owned();
-    let args_to_sort = &mut mut_args[1..];
+    let mut args: Vec<String> = env::args().collect();
+    let args_to_sort = &mut args[1..];
     if args_to_sort.len() == 0 {
         panic!("Nothing to sort")
     }
