@@ -14,6 +14,16 @@ fn main() {
     println!("{doubled_outcome}");
   
     println!("{int2} {float}");
+
+    println!("Let's try a statement");
+
+    let foo = {
+        let bar = f64::from(doubled_outcome as u32) * float;
+        println!("({doubled_outcome} * {float}) + {int2} = ");
+        bar as u64 + u64::try_from(int2).unwrap_or(0)
+    };
+
+    println!("{foo}")
     
   }
   
