@@ -1,4 +1,5 @@
 use std::env;
+use std::fmt;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -8,7 +9,7 @@ fn main() {
         return
     }
     let guess = Guess { value: args[1].to_owned() };
-    println!("Your guess was {guess:?}");
+    println!("Your guess was {guess}");
     let wisely = if guess.value == "foo" { "wisely!" } else { "poorly 💀" };
     println!("You have chosen... {0}", wisely);
 }
@@ -16,4 +17,10 @@ fn main() {
 #[derive(Debug)]
 struct Guess {
     value: String
+}
+
+impl fmt::Display for Guess {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "\"{}\"", self.value)
+    }
 }
