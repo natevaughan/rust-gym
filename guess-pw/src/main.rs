@@ -7,8 +7,13 @@ fn main() {
         eprintln!("cargo run <guess>");
         return
     }
-    let guess = &args[1];
-    println!("Your guess was {guess}");
-    let wisely = if guess == "foo" { "wisely!" } else { "poorly 💀" };
+    let guess = Guess { value: args[1].to_owned() };
+    println!("Your guess was {guess:?}");
+    let wisely = if guess.value == "foo" { "wisely!" } else { "poorly 💀" };
     println!("You have chosen... {0}", wisely);
+}
+
+#[derive(Debug)]
+struct Guess {
+    value: String
 }
