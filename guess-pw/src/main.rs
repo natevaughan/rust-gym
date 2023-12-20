@@ -8,19 +8,25 @@ fn main() {
         eprintln!("cargo run <guess>");
         return
     }
-    let guess = Guess { value: args[1].to_owned() };
+    let guess = Guess { value: args[1].to_string() };
     println!("Your guess was {guess}");
-    let wisely = if guess.value == "foo" { "wisely!" } else { "poorly 💀" };
-    println!("You have chosen... {0}", wisely);
+    let (msg, _) = check(guess);
+    println!("You have chosen... {}", msg);
 }
 
 #[derive(Debug)]
 struct Guess {
-    value: String
+    pub value: String
 }
 
 impl fmt::Display for Guess {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "\"{}\"", self.value)
+        write!(f, "{}", self.value)
     }
+}
+
+fn check(guess: Guess) -> (String, bool) {
+    let result = guess.value == "foo";
+    let wisely = if result { "wisely!" } else { "poorly 💀" };
+    (wisely.to_string(), result)
 }
