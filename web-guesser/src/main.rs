@@ -1,57 +1,72 @@
 use axum::{
-    routing::{get, post},
+    routing::{post},
     http::StatusCode,
     Json, Router,
 };
-use serde::{Deserialize, Serialize};
+use serde::{
+    Deserialize, 
+    Serialize
+};
+use std::sync::Mutex;
+use lazy_static::lazy_static;
+use rand::Rng;
+
+lazy_static! {
+    static ref COUNTER: Mutex<isize> = Mutex::new(0);
+    static ref RAND: Mutex<isize> = Mutex::new(rand::thread_rng().gen_range(0..100));
+}
 
 #[tokio::main]
 async fn main() {
-    // initialize tracing
     tracing_subscriber::fmt::init();
 
-    // build our application with a route
     let app = Router::new()
-        // `GET /` goes to `root`
-        .route("/", get(root))
-        // `POST /users` goes to `create_user`
         .route("/guess", post(guess));
 
-    // run our app with hyper, listening globally on port 3000
+    // run our app with hyper, listening globally on port 3333
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3333").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
 
-// basic handler that responds with a static string
-async fn root() -> &'static str {
-    "Hello, World!"
-}
-
 async fn guess(
-    // this argument tells axum to parse the request body
-    // as JSON into a `CreateUser` type
     Json(payload): Json<Guess>,
 ) -> (StatusCode, Json<GuessResponse>) {
-    // insert your application logic here
+
+    *COUNTER.lock().unwrap() += 1;
+    let cc = *COUNTER.lock().unwrap();
+    let message = process(payload.guess);
+
     let user = GuessResponse {
-        attempts: 1,
-        message: payload.guess.to_string(),
+        attempts: cc,
+        message: message.to_string(),
     };
 
-    // this will be converted into a JSON response
-    // with a status code of `201 Created`
-    (StatusCode::CREATED, Json(user))
+    (StatusCode::OK, Json(user))
 }
 
-// the input to our `create_user` handler
+fn process(guess: isize) -> &'static str {
+
+    let mut rand = *RAND.lock().unwrap();
+    println!("SECRET rand was: {}", rand);
+
+    return if guess < rand {
+        "Your guess was too low"
+    } else if guess > rand {
+        "Your guess was too high"
+    } else {
+        *COUNTER.lock().unwrap() = 0;
+        *RAND.lock().unwrap() = rand::thread_rng().gen_range(0..100);
+        "Nailed it!"
+    }
+}
+
 #[derive(Deserialize)]
 struct Guess {
-    guess: i64,
+    guess: isize,
 }
 
-// the output to our `create_user` handler
 #[derive(Serialize)]
 struct GuessResponse {
-    attempts: u64,
+    attempts: isize,
     message: String,
 }
