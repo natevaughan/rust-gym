@@ -22,5 +22,22 @@ fn interpolate(first: f64, second: f64, scalar: f64) -> f64 {
 }
 
 fn scale(first: f64, second: f64, val: f64) -> f64 {
-    return val / (second - first);
+    return (val - first) / (second - first);
+}
+
+#[cfg(test)]
+mod tests {
+    // Note this useful idiom: importing names from outer (for mod tests) scope.
+    use super::*;
+
+    #[test]
+    fn test_scale_in_range() {
+        assert_eq!(scale(5.0, 10.0, 7.5), 0.5);
+    }
+
+    #[test]
+    fn test_scale_out_of_range() {
+        assert_eq!(scale(5.0, 10.0, 2.5), -0.5);
+    }
+
 }
