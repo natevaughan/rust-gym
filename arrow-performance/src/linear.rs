@@ -1,14 +1,10 @@
 
 pub fn interpolate_linear(first: f64, second: f64, scalar: f64) -> f64 {
-    let calc = (second - first) * scalar + first;
-    println!("Linearly interpolated {} and {}, got {}", first, second, calc);
-    calc
+    (second - first) * scalar + first
 }
 
 pub fn scale(first: f64, second: f64, val: f64) -> f64 {
-    let calc = (val - first) / (second - first);
-    println!("scaled {} and {}, got {}", first, second, calc);
-    calc
+    (val - first) / (second - first)
 }
 
 pub fn lin(a: f64, b: f64, x: f64) -> f64 {
