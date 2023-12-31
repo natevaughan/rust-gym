@@ -149,12 +149,37 @@ fn search_for_nearest_curves<T: Scaled>(curves: &[T], scalar: f64) -> (&T, &T) {
     (smallest, second_smallest)
 }
 
+#[derive(Debug)]
+#[derive(PartialEq)]
+struct Line {
+    scalar: f64,
+    a: f64,
+    b: f64,
+}
+
+impl Scaled for Line {
+    fn scalar(&self) -> f64 {
+        self.scalar
+    }
+}
+
 struct QuadCurve {
-    name: String,
     scalar: f64,
     a: f64,
     b: f64,
     c: f64,
+}
+
+impl Scaled for QuadCurve {
+    fn scalar(&self) -> f64 {
+        self.scalar
+    }
+}
+
+trait Scaled {
+    fn scalar(&self) -> f64;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
