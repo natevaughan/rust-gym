@@ -1,6 +1,30 @@
+use arrow_performance::Scaled;
+use arrow_performance::Calculable;
+
+impl Calculable for Line {
+    fn calc(&self, x: f64) -> f64 {
+        lin(self.a, self.b, x)
+    }
+}
+
+#[derive(Debug)]
+#[derive(PartialEq)]
+pub struct Line {
+    pub scalar: f64,
+    pub a: f64,
+    pub b: f64,
+}
+
+impl Scaled for Line {
+    fn scalar(&self) -> f64 {
+        self.scalar
+    }
+}
 
 pub fn interpolate_linear(first: f64, second: f64, scalar: f64) -> f64 {
-    (second - first) * scalar + first
+    let calc = (second - first) * scalar + first;
+    println!("Interpolating {} and {} using scalar {}: {}", first, second, scalar, calc);
+    calc
 }
 
 pub fn scale(first: f64, second: f64, val: f64) -> f64 {

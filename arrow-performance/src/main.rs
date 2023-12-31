@@ -1,8 +1,11 @@
 use std::env;
+use arrow_performance::Scaled;
+use arrow_performance::Calculable;
 use crate::linear::scale;
 use crate::linear::interpolate_linear;
 use crate::linear::lin;
-use crate::quadratic::quad;
+use crate::linear::Line;
+use crate::quadratic::QuadCurve;
 
 mod linear;
 mod quadratic;
@@ -27,17 +30,17 @@ fn main() {
         c: 283.3
     }, QuadCurve {
         scalar: 2000.0,
-        a: -148.028, 
+        a: -148.028,
         b: 0.0362252,
         c: 665.469
     }, QuadCurve {
         scalar: 4000.0,
-        a: -216.325, 
+        a: -216.325,
         b: 0.0318901,
         c: 392.791
     }, QuadCurve {
         scalar: 6000.0,
-        a: -235.315, 
+        a: -235.315,
         b: 0.0353866,
         c: 434.767
     }, QuadCurve {
@@ -48,11 +51,11 @@ fn main() {
     }];
 
     let (nearest_low, nearest_high) = search_for_nearest_curves(&curves, pressure_alt);
-    println!("Nearest two are {} and {}", nearest_low.scalar, nearest_high.scalar);
+    println!("Nearest two are {} and {}", nearest_low.scalar(), nearest_high.scalar());
 
-    let val1 = calc_from_curve(nearest_low, iso_temp_f);
-    let val2 = calc_from_curve(nearest_high, iso_temp_f);
-    let init_roll = interpolate_linear(val1, val2, scale(nearest_low.scalar, nearest_high.scalar, pressure_alt));
+    let val1 = nearest_low.calc(iso_temp_f);
+    let val2 = nearest_high.calc(iso_temp_f);
+    let init_roll = interpolate_linear(val1, val2, scale(nearest_low.scalar(), nearest_high.scalar(), pressure_alt));
     let weight_scalar = scale(2000.0, 2750.0, take_off_weight);
     let vr = interpolate_linear(60.0, 71.0, weight_scalar);
     println!("Initial roll: {:>5}", init_roll.round() as i64);
@@ -60,76 +63,68 @@ fn main() {
     // Second calc
     let weight_curves = [QuadCurve {
         scalar: 3300.0,
-        a: -4043.7, 
+        a: -4043.7,
         b: 0.000163585,
         c: -4250.13
     }, QuadCurve {
         scalar: 3000.0,
-        a: -473.892, 
+        a: -473.892,
         b: 0.000325273,
         c: -380.715
     }, QuadCurve {
         scalar: 2500.0,
-        a: 25.0, 
+        a: 25.0,
         b: 0.0003333333,
         c: 24.7917
     }, QuadCurve {
         scalar: 2050.0,
-        a: 383.947, 
+        a: 383.947,
         b: 0.000324786,
         c: 231.78
     }, QuadCurve {
         scalar: 1710.0,
-        a: -379.118, 
+        a: -379.118,
         b: 0.000203106,
         c: -278.691
     }];
 
     let (first, second) = search_for_nearest_curves(&weight_curves, init_roll);
-    println!("Nearest two are {} and {}", first.scalar, second.scalar);
-    let val3 = calc_from_curve(first, take_off_weight);
-    let val4 = calc_from_curve(second, take_off_weight);
-    let adj_roll = interpolate_linear(val3, val4, scale(first.scalar, second.scalar, init_roll));
+    println!("Nearest two are {} and {}", first.scalar(), second.scalar());
+    let val3 = first.calc(take_off_weight);
+    let val4 = second.calc(take_off_weight);
+    let adj_roll = interpolate_linear(val3, val4, scale(first.scalar(), second.scalar(), init_roll));
     println!("adjusted for weight roll: {:>5}", adj_roll.round() as i64);
 
     // Third calc
     let lines = [Line {
         scalar: 1275.0,
-        a: -17.0, 
+        a: -17.0,
         b: 1275.0,
     }, Line {
         scalar: 1725.0,
-        a: -22.0, 
+        a: -22.0,
         b: 1725.0,
     }, Line {
         scalar: 2240.0,
-        a: -26.0, 
+        a: -26.0,
         b: 2240.0,
     }, Line {
         scalar: 2750.0,
-        a: -34.0, 
+        a: -34.0,
         b: 2750.0,
     }, Line {
         scalar: 3350.0,
-        a: -40.0, 
+        a: -40.0,
         b: 3350.0,
     }];
 
     let (first_l, second_l) = search_for_nearest_curves(&lines, adj_roll);
-    println!("Nearest two are {} and {}", first_l.scalar, second_l.scalar);
-    let val5 = calc_from_line(first_l, wind);
-    let val6 = calc_from_line(second_l, wind);
-    let final_roll = interpolate_linear(val5, val6, scale(first_l.scalar, second_l.scalar, adj_roll));
+    println!("Nearest two are {} and {}", first_l.scalar(), second_l.scalar());
+    let val5 = first_l.calc(wind);
+    let val6 = second_l.calc(wind);
+    let final_roll = interpolate_linear(val5, val6, scale(first_l.scalar(), second_l.scalar(), adj_roll));
     println!("final roll: {:>5}", final_roll.round() as i64);
     println!("Vr:         {:>5}", vr.round() as i64);
-}
-
-fn calc_from_line(c: &Line, x: f64) -> f64 {
-    lin(c.a, c.b, x)
-}
-
-fn calc_from_curve(c: &QuadCurve, x: f64) -> f64 {
-    quad(c.a, c.b, c.c, x)
 }
 
 fn search_for_nearest_curves<T: Scaled>(curves: &[T], scalar: f64) -> (&T, &T) {
@@ -147,37 +142,6 @@ fn search_for_nearest_curves<T: Scaled>(curves: &[T], scalar: f64) -> (&T, &T) {
         }
     }
     (smallest, second_smallest)
-}
-
-#[derive(Debug)]
-#[derive(PartialEq)]
-struct Line {
-    scalar: f64,
-    a: f64,
-    b: f64,
-}
-
-impl Scaled for Line {
-    fn scalar(&self) -> f64 {
-        self.scalar
-    }
-}
-
-struct QuadCurve {
-    scalar: f64,
-    a: f64,
-    b: f64,
-    c: f64,
-}
-
-impl Scaled for QuadCurve {
-    fn scalar(&self) -> f64 {
-        self.scalar
-    }
-}
-
-trait Scaled {
-    fn scalar(&self) -> f64;
 }
 
 #[cfg(test)]
