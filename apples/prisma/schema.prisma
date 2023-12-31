@@ -11,13 +11,13 @@ generator client {
 }
 
 model Apple {
-  id          String       @id
+  id          String      @id
   varietyName String
-  color       String       @default("MIXED")
-  AppleCount  AppleCount[]
+  color       String      @default("MIXED")
+  Inventory   Inventory[]
 }
 
-model AppleCount {
+model Inventory {
   id      String @id
   apple   Apple  @relation(fields: [appleId], references: [id])
   count   Int    @default(0)

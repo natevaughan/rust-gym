@@ -212,20 +212,20 @@ pub mod apple {
             }
         }
     }
-    pub mod apple_count {
+    pub mod inventory {
         use super::super::*;
         use super::_prisma::*;
         use super::{
             OrderByParam, SetParam, UncheckedSetParam, UniqueWhereParam, WhereParam, WithParam,
         };
-        pub const NAME: &str = "AppleCount";
-        pub struct Fetch(pub apple_count::ManyArgs);
+        pub const NAME: &str = "Inventory";
+        pub struct Fetch(pub inventory::ManyArgs);
         impl Fetch {
-            pub fn with(mut self, params: impl Into<apple_count::WithParam>) -> Self {
+            pub fn with(mut self, params: impl Into<inventory::WithParam>) -> Self {
                 self.0 = self.0.with(params.into());
                 self
             }
-            pub fn order_by(mut self, param: apple_count::OrderByParam) -> Self {
+            pub fn order_by(mut self, param: inventory::OrderByParam) -> Self {
                 self.0 = self.0.order_by(param);
                 self
             }
@@ -237,51 +237,51 @@ pub mod apple {
                 self.0 = self.0.take(value);
                 self
             }
-            pub fn cursor(mut self, value: apple_count::UniqueWhereParam) -> Self {
+            pub fn cursor(mut self, value: inventory::UniqueWhereParam) -> Self {
                 self.0 = self.0.cursor(value.into());
                 self
             }
         }
         impl From<Fetch> for WithParam {
             fn from(Fetch(v): Fetch) -> Self {
-                WithParam::AppleCount(v)
+                WithParam::Inventory(v)
             }
         }
-        pub fn fetch(params: Vec<apple_count::WhereParam>) -> Fetch {
-            Fetch(apple_count::ManyArgs::new(params))
+        pub fn fetch(params: Vec<inventory::WhereParam>) -> Fetch {
+            Fetch(inventory::ManyArgs::new(params))
         }
-        pub struct Connect(pub Vec<apple_count::UniqueWhereParam>);
+        pub struct Connect(pub Vec<inventory::UniqueWhereParam>);
         impl From<Connect> for SetParam {
             fn from(Connect(v): Connect) -> Self {
-                Self::ConnectAppleCount(v)
+                Self::ConnectInventory(v)
             }
         }
-        pub fn connect<T: From<Connect>>(params: Vec<apple_count::UniqueWhereParam>) -> T {
+        pub fn connect<T: From<Connect>>(params: Vec<inventory::UniqueWhereParam>) -> T {
             Connect(params).into()
         }
-        pub fn disconnect(params: Vec<apple_count::UniqueWhereParam>) -> SetParam {
-            SetParam::DisconnectAppleCount(params)
+        pub fn disconnect(params: Vec<inventory::UniqueWhereParam>) -> SetParam {
+            SetParam::DisconnectInventory(params)
         }
-        pub fn set(params: Vec<apple_count::UniqueWhereParam>) -> SetParam {
-            SetParam::SetAppleCount(params)
+        pub fn set(params: Vec<inventory::UniqueWhereParam>) -> SetParam {
+            SetParam::SetInventory(params)
         }
-        pub fn some(value: Vec<apple_count::WhereParam>) -> WhereParam {
-            WhereParam::AppleCountSome(value)
+        pub fn some(value: Vec<inventory::WhereParam>) -> WhereParam {
+            WhereParam::InventorySome(value)
         }
-        pub fn every(value: Vec<apple_count::WhereParam>) -> WhereParam {
-            WhereParam::AppleCountEvery(value)
+        pub fn every(value: Vec<inventory::WhereParam>) -> WhereParam {
+            WhereParam::InventoryEvery(value)
         }
-        pub fn none(value: Vec<apple_count::WhereParam>) -> WhereParam {
-            WhereParam::AppleCountNone(value)
+        pub fn none(value: Vec<inventory::WhereParam>) -> WhereParam {
+            WhereParam::InventoryNone(value)
         }
         pub enum Include {
-            Select(apple_count::ManyArgs, Vec<apple_count::SelectParam>),
-            Include(apple_count::ManyArgs, Vec<apple_count::IncludeParam>),
-            Fetch(apple_count::ManyArgs),
+            Select(inventory::ManyArgs, Vec<inventory::SelectParam>),
+            Include(inventory::ManyArgs, Vec<inventory::IncludeParam>),
+            Fetch(inventory::ManyArgs),
         }
         impl Into<super::IncludeParam> for Include {
             fn into(self) -> super::IncludeParam {
-                super::IncludeParam::AppleCount(self)
+                super::IncludeParam::Inventory(self)
             }
         }
         impl Include {
@@ -292,39 +292,38 @@ pub mod apple {
                         selections.into_iter().map(|s| s.to_selection()).collect(),
                     ),
                     Self::Include(args, selections) => (args.to_graphql().0, {
-                        let mut nested_selections = < apple_count :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections () ;
+                        let mut nested_selections = < inventory :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections () ;
                         nested_selections.extend(selections.into_iter().map(|s| s.to_selection()));
                         nested_selections
                     }),
                     Self::Fetch(args) => (
                         args.to_graphql().0,
-                        <apple_count::Types as ::prisma_client_rust::ModelTypes>::scalar_selections(
-                        ),
+                        <inventory::Types as ::prisma_client_rust::ModelTypes>::scalar_selections(),
                     ),
                 };
                 ::prisma_client_rust::Selection::new(NAME, None, args, selections)
             }
             pub fn select(
-                args: apple_count::ManyArgs,
-                nested_selections: Vec<apple_count::SelectParam>,
+                args: inventory::ManyArgs,
+                nested_selections: Vec<inventory::SelectParam>,
             ) -> Self {
                 Self::Select(args, nested_selections)
             }
             pub fn include(
-                args: apple_count::ManyArgs,
-                nested_selections: Vec<apple_count::IncludeParam>,
+                args: inventory::ManyArgs,
+                nested_selections: Vec<inventory::IncludeParam>,
             ) -> Self {
                 Self::Include(args, nested_selections)
             }
         }
         pub enum Select {
-            Select(apple_count::ManyArgs, Vec<apple_count::SelectParam>),
-            Include(apple_count::ManyArgs, Vec<apple_count::IncludeParam>),
-            Fetch(apple_count::ManyArgs),
+            Select(inventory::ManyArgs, Vec<inventory::SelectParam>),
+            Include(inventory::ManyArgs, Vec<inventory::IncludeParam>),
+            Fetch(inventory::ManyArgs),
         }
         impl Into<super::SelectParam> for Select {
             fn into(self) -> super::SelectParam {
-                super::SelectParam::AppleCount(self)
+                super::SelectParam::Inventory(self)
             }
         }
         impl Select {
@@ -341,21 +340,20 @@ pub mod apple {
                     }),
                     Self::Fetch(args) => (
                         args.to_graphql().0,
-                        <apple_count::Types as ::prisma_client_rust::ModelTypes>::scalar_selections(
-                        ),
+                        <inventory::Types as ::prisma_client_rust::ModelTypes>::scalar_selections(),
                     ),
                 };
                 ::prisma_client_rust::Selection::new(NAME, None, args, selections)
             }
             pub fn select(
-                args: apple_count::ManyArgs,
-                nested_selections: Vec<apple_count::SelectParam>,
+                args: inventory::ManyArgs,
+                nested_selections: Vec<inventory::SelectParam>,
             ) -> Self {
                 Self::Select(args, nested_selections)
             }
             pub fn include(
-                args: apple_count::ManyArgs,
-                nested_selections: Vec<apple_count::IncludeParam>,
+                args: inventory::ManyArgs,
+                nested_selections: Vec<inventory::IncludeParam>,
             ) -> Self {
                 Self::Include(args, nested_selections)
             }
@@ -376,13 +374,13 @@ pub mod apple {
         (id, variety_name, _params)
     }
     #[macro_export]
-    macro_rules ! _select_apple { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple :: select ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn select ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple :: select ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { id , variety_name , color , apple_count } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { $ (pub $ field : crate :: prisma :: apple :: select ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) +] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple :: $ field :: NAME , & self . $ field) ? ;) * state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple :: $ field :: NAME) , + ,] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple :: $ field :: NAME => Ok (Field :: $ field)) , * , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * while let Some (key) = map . next_key () ? { match key { $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: $ field :: NAME)) ? ;) * Ok (Data { $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "varietyName" , "color" , "AppleCount"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; id) => { String } ; (@ field_type ; variety_name) => { String } ; (@ field_type ; color) => { String } ; (@ field_type ; apple_count : $ selection_mode : ident { $ ($ selections : tt) + }) => { Vec < apple_count :: Data > } ; (@ field_type ; apple_count) => { Vec < crate :: prisma :: apple_count :: Data > } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Apple" , available relations are "id, variety_name, color, apple_count")) } ; (@ field_module ; apple_count : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple_count :: select ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; id) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: id :: Select) } ; (@ selection_field_to_selection_param ; variety_name) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: variety_name :: Select) } ; (@ selection_field_to_selection_param ; color) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: color :: Select) } ; (@ selection_field_to_selection_param ; apple_count $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: apple_count :: Select :: $ selection_mode (crate :: prisma :: apple_count :: ManyArgs :: new (crate :: prisma :: apple_count :: select ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ? , crate :: prisma :: apple_count :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple_count $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: apple_count :: Select :: Fetch (crate :: prisma :: apple_count :: ManyArgs :: new (crate :: prisma :: apple_count :: select ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ?) ,) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; variety_name) => { "varietyName" } ; (@ field_serde_name ; color) => { "color" } ; (@ field_serde_name ; apple_count) => { "AppleCount" } ; }
+    macro_rules ! _select_apple { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple :: select ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn select ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple :: select ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { id , variety_name , color , inventory } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { $ (pub $ field : crate :: prisma :: apple :: select ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) +] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple :: $ field :: NAME , & self . $ field) ? ;) * state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple :: $ field :: NAME) , + ,] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple :: $ field :: NAME => Ok (Field :: $ field)) , * , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * while let Some (key) = map . next_key () ? { match key { $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: $ field :: NAME)) ? ;) * Ok (Data { $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "varietyName" , "color" , "Inventory"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; id) => { String } ; (@ field_type ; variety_name) => { String } ; (@ field_type ; color) => { String } ; (@ field_type ; inventory : $ selection_mode : ident { $ ($ selections : tt) + }) => { Vec < inventory :: Data > } ; (@ field_type ; inventory) => { Vec < crate :: prisma :: inventory :: Data > } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Apple" , available relations are "id, variety_name, color, inventory")) } ; (@ field_module ; inventory : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: inventory :: select ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; id) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: id :: Select) } ; (@ selection_field_to_selection_param ; variety_name) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: variety_name :: Select) } ; (@ selection_field_to_selection_param ; color) => { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: color :: Select) } ; (@ selection_field_to_selection_param ; inventory $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: inventory :: Select :: $ selection_mode (crate :: prisma :: inventory :: ManyArgs :: new (crate :: prisma :: inventory :: select ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ? , crate :: prisma :: inventory :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; inventory $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple :: SelectParam > :: into (crate :: prisma :: apple :: inventory :: Select :: Fetch (crate :: prisma :: inventory :: ManyArgs :: new (crate :: prisma :: inventory :: select ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ?) ,) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; variety_name) => { "varietyName" } ; (@ field_serde_name ; color) => { "color" } ; (@ field_serde_name ; inventory) => { "Inventory" } ; }
     pub use _select_apple as select;
     pub enum SelectParam {
         Id(id::Select),
         VarietyName(variety_name::Select),
         Color(color::Select),
-        AppleCount(apple_count::Select),
+        Inventory(inventory::Select),
     }
     impl SelectParam {
         pub fn to_selection(self) -> ::prisma_client_rust::Selection {
@@ -390,18 +388,18 @@ pub mod apple {
                 Self::Id(data) => data.to_selection(),
                 Self::VarietyName(data) => data.to_selection(),
                 Self::Color(data) => data.to_selection(),
-                Self::AppleCount(data) => data.to_selection(),
+                Self::Inventory(data) => data.to_selection(),
             }
         }
     }
     #[macro_export]
-    macro_rules ! _include_apple { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple :: include ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn include ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple :: include ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { apple_count } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { pub id : String , pub variety_name : String , pub color : String , $ (pub $ field : crate :: prisma :: apple :: include ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) + stringify ! (id) , stringify ! (variety_name) , stringify ! (color)] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple :: $ field :: NAME , & self . $ field) ? ;) * state . serialize_field (crate :: prisma :: apple :: id :: NAME , & self . id) ? ; state . serialize_field (crate :: prisma :: apple :: variety_name :: NAME , & self . variety_name) ? ; state . serialize_field (crate :: prisma :: apple :: color :: NAME , & self . color) ? ; state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , id , variety_name , color } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple :: $ field :: NAME) , + , crate :: prisma :: apple :: id :: NAME , crate :: prisma :: apple :: variety_name :: NAME , crate :: prisma :: apple :: color :: NAME] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple :: $ field :: NAME => Ok (Field :: $ field)) , * , crate :: prisma :: apple :: id :: NAME => Ok (Field :: id) , crate :: prisma :: apple :: variety_name :: NAME => Ok (Field :: variety_name) , crate :: prisma :: apple :: color :: NAME => Ok (Field :: color) , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * let mut id = None ; let mut variety_name = None ; let mut color = None ; while let Some (key) = map . next_key () ? { match key { Field :: id => { if id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: id :: NAME)) ; } id = Some (map . next_value () ?) ; } Field :: variety_name => { if variety_name . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: variety_name :: NAME)) ; } variety_name = Some (map . next_value () ?) ; } Field :: color => { if color . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: color :: NAME)) ; } color = Some (map . next_value () ?) ; } $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: $ field :: NAME)) ? ;) * let id = id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: id :: NAME)) ? ; let variety_name = variety_name . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: variety_name :: NAME)) ? ; let color = color . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: color :: NAME)) ? ; Ok (Data { id , variety_name , color , $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "varietyName" , "color" , "AppleCount"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; apple_count : $ selection_mode : ident { $ ($ selections : tt) + }) => { Vec < apple_count :: Data > } ; (@ field_type ; apple_count) => { Vec < crate :: prisma :: apple_count :: Data > } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Apple" , available relations are "apple_count")) } ; (@ field_module ; apple_count : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple_count :: include ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; apple_count $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple :: IncludeParam > :: into (crate :: prisma :: apple :: apple_count :: Include :: $ selection_mode (crate :: prisma :: apple_count :: ManyArgs :: new (crate :: prisma :: apple_count :: include ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ? , crate :: prisma :: apple_count :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple_count $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple :: IncludeParam > :: into (crate :: prisma :: apple :: apple_count :: Include :: Fetch (crate :: prisma :: apple_count :: ManyArgs :: new (crate :: prisma :: apple_count :: include ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ?) ,) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; variety_name) => { "varietyName" } ; (@ field_serde_name ; color) => { "color" } ; (@ field_serde_name ; apple_count) => { "AppleCount" } ; }
+    macro_rules ! _include_apple { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple :: include ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn include ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple :: include ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { inventory } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { pub id : String , pub variety_name : String , pub color : String , $ (pub $ field : crate :: prisma :: apple :: include ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) + stringify ! (id) , stringify ! (variety_name) , stringify ! (color)] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple :: $ field :: NAME , & self . $ field) ? ;) * state . serialize_field (crate :: prisma :: apple :: id :: NAME , & self . id) ? ; state . serialize_field (crate :: prisma :: apple :: variety_name :: NAME , & self . variety_name) ? ; state . serialize_field (crate :: prisma :: apple :: color :: NAME , & self . color) ? ; state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , id , variety_name , color } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple :: $ field :: NAME) , + , crate :: prisma :: apple :: id :: NAME , crate :: prisma :: apple :: variety_name :: NAME , crate :: prisma :: apple :: color :: NAME] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple :: $ field :: NAME => Ok (Field :: $ field)) , * , crate :: prisma :: apple :: id :: NAME => Ok (Field :: id) , crate :: prisma :: apple :: variety_name :: NAME => Ok (Field :: variety_name) , crate :: prisma :: apple :: color :: NAME => Ok (Field :: color) , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * let mut id = None ; let mut variety_name = None ; let mut color = None ; while let Some (key) = map . next_key () ? { match key { Field :: id => { if id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: id :: NAME)) ; } id = Some (map . next_value () ?) ; } Field :: variety_name => { if variety_name . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: variety_name :: NAME)) ; } variety_name = Some (map . next_value () ?) ; } Field :: color => { if color . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: color :: NAME)) ; } color = Some (map . next_value () ?) ; } $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: $ field :: NAME)) ? ;) * let id = id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: id :: NAME)) ? ; let variety_name = variety_name . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: variety_name :: NAME)) ? ; let color = color . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple :: color :: NAME)) ? ; Ok (Data { id , variety_name , color , $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "varietyName" , "color" , "Inventory"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; inventory : $ selection_mode : ident { $ ($ selections : tt) + }) => { Vec < inventory :: Data > } ; (@ field_type ; inventory) => { Vec < crate :: prisma :: inventory :: Data > } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Apple" , available relations are "inventory")) } ; (@ field_module ; inventory : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: inventory :: include ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; inventory $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple :: IncludeParam > :: into (crate :: prisma :: apple :: inventory :: Include :: $ selection_mode (crate :: prisma :: inventory :: ManyArgs :: new (crate :: prisma :: inventory :: include ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ? , crate :: prisma :: inventory :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; inventory $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple :: IncludeParam > :: into (crate :: prisma :: apple :: inventory :: Include :: Fetch (crate :: prisma :: inventory :: ManyArgs :: new (crate :: prisma :: inventory :: include ! (@ filters_to_args ; $ ($ ($ filters) +) ?)) $ ($ (. $ arg ($ ($ arg_params) *)) *) ?) ,) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; variety_name) => { "varietyName" } ; (@ field_serde_name ; color) => { "color" } ; (@ field_serde_name ; inventory) => { "Inventory" } ; }
     pub use _include_apple as include;
     pub enum IncludeParam {
         Id(id::Include),
         VarietyName(variety_name::Include),
         Color(color::Include),
-        AppleCount(apple_count::Include),
+        Inventory(inventory::Include),
     }
     impl IncludeParam {
         pub fn to_selection(self) -> ::prisma_client_rust::Selection {
@@ -409,7 +407,7 @@ pub mod apple {
                 Self::Id(data) => data.to_selection(),
                 Self::VarietyName(data) => data.to_selection(),
                 Self::Color(data) => data.to_selection(),
-                Self::AppleCount(data) => data.to_selection(),
+                Self::Inventory(data) => data.to_selection(),
             }
         }
     }
@@ -424,33 +422,33 @@ pub mod apple {
         pub variety_name: String,
         #[serde(rename = "color")]
         pub color: String,
-        #[serde(rename = "AppleCount")]
-        pub apple_count: Option<Vec<super::apple_count::Data>>,
+        #[serde(rename = "Inventory")]
+        pub inventory: Option<Vec<super::inventory::Data>>,
     }
     impl Data {
-        pub fn apple_count(
+        pub fn inventory(
             &self,
-        ) -> Result<&Vec<super::apple_count::Data>, ::prisma_client_rust::RelationNotFetchedError>
+        ) -> Result<&Vec<super::inventory::Data>, ::prisma_client_rust::RelationNotFetchedError>
         {
-            self.apple_count
+            self.inventory
                 .as_ref()
                 .ok_or(::prisma_client_rust::RelationNotFetchedError::new(
-                    stringify!(apple_count),
+                    stringify!(inventory),
                 ))
         }
     }
     #[derive(Clone)]
     pub enum WithParam {
-        AppleCount(super::apple_count::ManyArgs),
+        Inventory(super::inventory::ManyArgs),
     }
     impl Into<::prisma_client_rust::Selection> for WithParam {
         fn into(self) -> ::prisma_client_rust::Selection {
             match self {
-                Self::AppleCount(args) => {
+                Self::Inventory(args) => {
                     let (arguments, mut nested_selections) = args.to_graphql();
-                    nested_selections . extend (< super :: apple_count :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()) ;
+                    nested_selections . extend (< super :: inventory :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()) ;
                     ::prisma_client_rust::Selection::new(
-                        apple_count::NAME,
+                        inventory::NAME,
                         None,
                         arguments,
                         nested_selections,
@@ -464,9 +462,9 @@ pub mod apple {
         SetId(String),
         SetVarietyName(String),
         SetColor(String),
-        ConnectAppleCount(Vec<super::apple_count::UniqueWhereParam>),
-        DisconnectAppleCount(Vec<super::apple_count::UniqueWhereParam>),
-        SetAppleCount(Vec<super::apple_count::UniqueWhereParam>),
+        ConnectInventory(Vec<super::inventory::UniqueWhereParam>),
+        DisconnectInventory(Vec<super::inventory::UniqueWhereParam>),
+        SetInventory(Vec<super::inventory::UniqueWhereParam>),
     }
     impl From<SetParam> for (String, ::prisma_client_rust::PrismaValue) {
         fn from(param: SetParam) -> Self {
@@ -483,14 +481,14 @@ pub mod apple {
                     color::NAME.to_string(),
                     ::prisma_client_rust::PrismaValue::String(value),
                 ),
-                SetParam::ConnectAppleCount(where_params) => (
-                    apple_count::NAME.to_string(),
+                SetParam::ConnectInventory(where_params) => (
+                    inventory::NAME.to_string(),
                     ::prisma_client_rust::PrismaValue::Object(vec![(
                         "connect".to_string(),
                         ::prisma_client_rust::PrismaValue::List(
                             where_params
                                 .into_iter()
-                                .map(Into::<super::apple_count::WhereParam>::into)
+                                .map(Into::<super::inventory::WhereParam>::into)
                                 .map(::prisma_client_rust::WhereInput::serialize)
                                 .map(::prisma_client_rust::SerializedWhereInput::transform_equals)
                                 .map(|v| ::prisma_client_rust::PrismaValue::Object(vec![v]))
@@ -498,14 +496,14 @@ pub mod apple {
                         ),
                     )]),
                 ),
-                SetParam::DisconnectAppleCount(where_params) => (
-                    apple_count::NAME.to_string(),
+                SetParam::DisconnectInventory(where_params) => (
+                    inventory::NAME.to_string(),
                     ::prisma_client_rust::PrismaValue::Object(vec![(
                         "disconnect".to_string(),
                         ::prisma_client_rust::PrismaValue::List(
                             where_params
                                 .into_iter()
-                                .map(Into::<super::apple_count::WhereParam>::into)
+                                .map(Into::<super::inventory::WhereParam>::into)
                                 .map(::prisma_client_rust::WhereInput::serialize)
                                 .map(::prisma_client_rust::SerializedWhereInput::transform_equals)
                                 .map(|v| ::prisma_client_rust::PrismaValue::Object(vec![v]))
@@ -513,14 +511,14 @@ pub mod apple {
                         ),
                     )]),
                 ),
-                SetParam::SetAppleCount(where_params) => (
-                    apple_count::NAME.to_string(),
+                SetParam::SetInventory(where_params) => (
+                    inventory::NAME.to_string(),
                     ::prisma_client_rust::PrismaValue::Object(vec![(
                         "set".to_string(),
                         ::prisma_client_rust::PrismaValue::List(
                             where_params
                                 .into_iter()
-                                .map(Into::<super::apple_count::WhereParam>::into)
+                                .map(Into::<super::inventory::WhereParam>::into)
                                 .map(::prisma_client_rust::WhereInput::serialize)
                                 .map(::prisma_client_rust::SerializedWhereInput::transform_equals)
                                 .map(|v| ::prisma_client_rust::PrismaValue::Object(vec![v]))
@@ -578,9 +576,9 @@ pub mod apple {
         Id(_prisma::read_filters::StringFilter),
         VarietyName(_prisma::read_filters::StringFilter),
         Color(_prisma::read_filters::StringFilter),
-        AppleCountSome(Vec<super::apple_count::WhereParam>),
-        AppleCountEvery(Vec<super::apple_count::WhereParam>),
-        AppleCountNone(Vec<super::apple_count::WhereParam>),
+        InventorySome(Vec<super::inventory::WhereParam>),
+        InventoryEvery(Vec<super::inventory::WhereParam>),
+        InventoryNone(Vec<super::inventory::WhereParam>),
     }
     impl ::prisma_client_rust::WhereInput for WhereParam {
         fn serialize(self) -> ::prisma_client_rust::SerializedWhereInput {
@@ -624,8 +622,8 @@ pub mod apple {
                 Self::Id(value) => (id::NAME, value.into()),
                 Self::VarietyName(value) => (variety_name::NAME, value.into()),
                 Self::Color(value) => (color::NAME, value.into()),
-                Self::AppleCountSome(where_params) => (
-                    apple_count::NAME,
+                Self::InventorySome(where_params) => (
+                    inventory::NAME,
                     ::prisma_client_rust::SerializedWhereValue::Object(vec![(
                         "some".to_string(),
                         ::prisma_client_rust::PrismaValue::Object(
@@ -637,8 +635,8 @@ pub mod apple {
                         ),
                     )]),
                 ),
-                Self::AppleCountEvery(where_params) => (
-                    apple_count::NAME,
+                Self::InventoryEvery(where_params) => (
+                    inventory::NAME,
                     ::prisma_client_rust::SerializedWhereValue::Object(vec![(
                         "every".to_string(),
                         ::prisma_client_rust::PrismaValue::Object(
@@ -650,8 +648,8 @@ pub mod apple {
                         ),
                     )]),
                 ),
-                Self::AppleCountNone(where_params) => (
-                    apple_count::NAME,
+                Self::InventoryNone(where_params) => (
+                    inventory::NAME,
                     ::prisma_client_rust::SerializedWhereValue::Object(vec![(
                         "none".to_string(),
                         ::prisma_client_rust::PrismaValue::Object(
@@ -795,10 +793,10 @@ pub mod apple {
         }
     }
 }
-pub mod apple_count {
+pub mod inventory {
     use super::_prisma::*;
     use super::*;
-    pub const NAME: &str = "AppleCount";
+    pub const NAME: &str = "Inventory";
     pub mod id {
         use super::super::*;
         use super::_prisma::*;
@@ -1120,8 +1118,8 @@ pub mod apple_count {
         (id, apple_id, _params)
     }
     #[macro_export]
-    macro_rules ! _select_apple_count { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple_count :: select ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple_count :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn select ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple_count :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple_count :: select ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple_count :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple_count :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { id , apple , count , apple_id } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { $ (pub $ field : crate :: prisma :: apple_count :: select ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) +] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple_count :: $ field :: NAME , & self . $ field) ? ;) * state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple_count :: $ field :: NAME) , + ,] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple_count :: $ field :: NAME => Ok (Field :: $ field)) , * , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * while let Some (key) = map . next_key () ? { match key { $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple_count :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple_count :: $ field :: NAME)) ? ;) * Ok (Data { $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "apple" , "count" , "appleId"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple_count :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; id) => { String } ; (@ field_type ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { apple :: Data } ; (@ field_type ; apple) => { crate :: prisma :: apple :: Data } ; (@ field_type ; count) => { i32 } ; (@ field_type ; apple_id) => { String } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "AppleCount" , available relations are "id, apple, count, apple_id")) } ; (@ field_module ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple :: select ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; id) => { Into :: < crate :: prisma :: apple_count :: SelectParam > :: into (crate :: prisma :: apple_count :: id :: Select) } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple_count :: SelectParam > :: into (crate :: prisma :: apple_count :: apple :: Select :: $ selection_mode (crate :: prisma :: apple :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple_count :: SelectParam > :: into (crate :: prisma :: apple_count :: apple :: Select :: Fetch) } } ; (@ selection_field_to_selection_param ; count) => { Into :: < crate :: prisma :: apple_count :: SelectParam > :: into (crate :: prisma :: apple_count :: count :: Select) } ; (@ selection_field_to_selection_param ; apple_id) => { Into :: < crate :: prisma :: apple_count :: SelectParam > :: into (crate :: prisma :: apple_count :: apple_id :: Select) } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple_count :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; apple) => { "apple" } ; (@ field_serde_name ; count) => { "count" } ; (@ field_serde_name ; apple_id) => { "appleId" } ; }
-    pub use _select_apple_count as select;
+    macro_rules ! _select_inventory { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: inventory :: select ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: inventory :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn select ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: inventory :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: inventory :: select ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: SelectType for Selection { type Data = Data ; type ModelData = crate :: prisma :: inventory :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: inventory :: select ! (@ selections_to_params ; : select { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () ,] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { id , apple , count , apple_id } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { $ (pub $ field : crate :: prisma :: inventory :: select ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) +] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: inventory :: $ field :: NAME , & self . $ field) ? ;) * state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: inventory :: $ field :: NAME) , + ,] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: inventory :: $ field :: NAME => Ok (Field :: $ field)) , * , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * while let Some (key) = map . next_key () ? { match key { $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: inventory :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: inventory :: $ field :: NAME)) ? ;) * Ok (Data { $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "apple" , "count" , "appleId"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: inventory :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; id) => { String } ; (@ field_type ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { apple :: Data } ; (@ field_type ; apple) => { crate :: prisma :: apple :: Data } ; (@ field_type ; count) => { i32 } ; (@ field_type ; apple_id) => { String } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Inventory" , available relations are "id, apple, count, apple_id")) } ; (@ field_module ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple :: select ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; id) => { Into :: < crate :: prisma :: inventory :: SelectParam > :: into (crate :: prisma :: inventory :: id :: Select) } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: inventory :: SelectParam > :: into (crate :: prisma :: inventory :: apple :: Select :: $ selection_mode (crate :: prisma :: apple :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: inventory :: SelectParam > :: into (crate :: prisma :: inventory :: apple :: Select :: Fetch) } } ; (@ selection_field_to_selection_param ; count) => { Into :: < crate :: prisma :: inventory :: SelectParam > :: into (crate :: prisma :: inventory :: count :: Select) } ; (@ selection_field_to_selection_param ; apple_id) => { Into :: < crate :: prisma :: inventory :: SelectParam > :: into (crate :: prisma :: inventory :: apple_id :: Select) } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: inventory :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; apple) => { "apple" } ; (@ field_serde_name ; count) => { "count" } ; (@ field_serde_name ; apple_id) => { "appleId" } ; }
+    pub use _select_inventory as select;
     pub enum SelectParam {
         Id(id::Select),
         Apple(apple::Select),
@@ -1139,8 +1137,8 @@ pub mod apple_count {
         }
     }
     #[macro_export]
-    macro_rules ! _include_apple_count { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: apple_count :: include ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple_count :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn include ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: apple_count :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple_count :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: apple_count :: include ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: apple_count :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: apple_count :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: apple_count :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { apple } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { pub id : String , pub count : i32 , pub apple_id : String , $ (pub $ field : crate :: prisma :: apple_count :: include ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) + stringify ! (id) , stringify ! (count) , stringify ! (apple_id)] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: apple_count :: $ field :: NAME , & self . $ field) ? ;) * state . serialize_field (crate :: prisma :: apple_count :: id :: NAME , & self . id) ? ; state . serialize_field (crate :: prisma :: apple_count :: count :: NAME , & self . count) ? ; state . serialize_field (crate :: prisma :: apple_count :: apple_id :: NAME , & self . apple_id) ? ; state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , id , count , apple_id } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: apple_count :: $ field :: NAME) , + , crate :: prisma :: apple_count :: id :: NAME , crate :: prisma :: apple_count :: count :: NAME , crate :: prisma :: apple_count :: apple_id :: NAME] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: apple_count :: $ field :: NAME => Ok (Field :: $ field)) , * , crate :: prisma :: apple_count :: id :: NAME => Ok (Field :: id) , crate :: prisma :: apple_count :: count :: NAME => Ok (Field :: count) , crate :: prisma :: apple_count :: apple_id :: NAME => Ok (Field :: apple_id) , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * let mut id = None ; let mut count = None ; let mut apple_id = None ; while let Some (key) = map . next_key () ? { match key { Field :: id => { if id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple_count :: id :: NAME)) ; } id = Some (map . next_value () ?) ; } Field :: count => { if count . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple_count :: count :: NAME)) ; } count = Some (map . next_value () ?) ; } Field :: apple_id => { if apple_id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple_count :: apple_id :: NAME)) ; } apple_id = Some (map . next_value () ?) ; } $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: apple_count :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple_count :: $ field :: NAME)) ? ;) * let id = id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple_count :: id :: NAME)) ? ; let count = count . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple_count :: count :: NAME)) ? ; let apple_id = apple_id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: apple_count :: apple_id :: NAME)) ? ; Ok (Data { id , count , apple_id , $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "apple" , "count" , "appleId"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: apple_count :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { apple :: Data } ; (@ field_type ; apple) => { crate :: prisma :: apple :: Data } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "AppleCount" , available relations are "apple")) } ; (@ field_module ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple :: include ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: apple_count :: IncludeParam > :: into (crate :: prisma :: apple_count :: apple :: Include :: $ selection_mode (crate :: prisma :: apple :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: apple_count :: IncludeParam > :: into (crate :: prisma :: apple_count :: apple :: Include :: Fetch) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: apple_count :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; apple) => { "apple" } ; (@ field_serde_name ; count) => { "count" } ; (@ field_serde_name ; apple_id) => { "appleId" } ; }
-    pub use _include_apple_count as include;
+    macro_rules ! _include_inventory { ($ (($ ($ func_arg : ident : $ func_arg_ty : ty) , +) =>) ? $ module_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { # [allow (warnings)] pub mod $ module_name { crate :: prisma :: inventory :: include ! (@ definitions ; $ module_name ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; use super :: * ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: inventory :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } pub fn include ($ ($ ($ func_arg : $ func_arg_ty) , +) ?) -> Selection { Selection ([crate :: prisma :: inventory :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: inventory :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } } ; ({ $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { { crate :: prisma :: inventory :: include ! (@ definitions ; ; $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) +) ; pub struct Selection (Vec < :: prisma_client_rust :: Selection >) ; impl :: prisma_client_rust :: IncludeType for Selection { type Data = Data ; type ModelData = crate :: prisma :: inventory :: Data ; fn to_selections (self) -> Vec < :: prisma_client_rust :: Selection > { self . 0 } } Selection ([crate :: prisma :: inventory :: include ! (@ selections_to_params ; : include { $ ($ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) + }) . into_iter () . map (| p | p . to_selection ()) . collect :: < Vec < _ >> () , < crate :: prisma :: inventory :: Types as :: prisma_client_rust :: ModelTypes > :: scalar_selections ()] . into_iter () . flatten () . collect :: < Vec < _ >> ()) } } ; (@ definitions ; $ ($ module_name : ident) ? ; $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) +) => { # [allow (warnings)] enum Fields { apple } # [allow (warnings)] impl Fields { fn selections () { $ (let _ = Fields :: $ field ;) + } } # [allow (warnings)] # [derive (std :: fmt :: Debug , Clone)] pub struct Data { pub id : String , pub count : i32 , pub apple_id : String , $ (pub $ field : crate :: prisma :: inventory :: include ! (@ field_type ; $ field $ (: $ selection_mode { $ ($ selections) + }) ?) ,) + } impl :: serde :: Serialize for Data { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : :: serde :: Serializer , { use :: serde :: ser :: SerializeStruct ; let mut state = serializer . serialize_struct ("Data" , [$ (stringify ! ($ field) ,) + stringify ! (id) , stringify ! (count) , stringify ! (apple_id)] . len ()) ? ; $ (state . serialize_field (crate :: prisma :: inventory :: $ field :: NAME , & self . $ field) ? ;) * state . serialize_field (crate :: prisma :: inventory :: id :: NAME , & self . id) ? ; state . serialize_field (crate :: prisma :: inventory :: count :: NAME , & self . count) ? ; state . serialize_field (crate :: prisma :: inventory :: apple_id :: NAME , & self . apple_id) ? ; state . end () } } impl < 'de > :: serde :: Deserialize < 'de > for Data { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : :: serde :: Deserializer < 'de > , { # [allow (warnings)] enum Field { $ ($ field) , + , id , count , apple_id } impl < 'de > :: serde :: Deserialize < 'de > for Field { fn deserialize < D > (deserializer : D) -> Result < Field , D :: Error > where D : :: serde :: Deserializer < 'de > , { struct FieldVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for FieldVisitor { type Value = Field ; fn expecting (& self , formatter : & mut :: std :: fmt :: Formatter) -> :: std :: fmt :: Result { formatter . write_str (& [$ (crate :: prisma :: inventory :: $ field :: NAME) , + , crate :: prisma :: inventory :: id :: NAME , crate :: prisma :: inventory :: count :: NAME , crate :: prisma :: inventory :: apple_id :: NAME] . into_iter () . collect :: < Vec < _ >> () . join (", ")) } fn visit_str < E > (self , value : & str) -> Result < Field , E > where E : :: serde :: de :: Error , { match value { $ (crate :: prisma :: inventory :: $ field :: NAME => Ok (Field :: $ field)) , * , crate :: prisma :: inventory :: id :: NAME => Ok (Field :: id) , crate :: prisma :: inventory :: count :: NAME => Ok (Field :: count) , crate :: prisma :: inventory :: apple_id :: NAME => Ok (Field :: apple_id) , _ => Err (:: serde :: de :: Error :: unknown_field (value , FIELDS)) , } } } deserializer . deserialize_identifier (FieldVisitor) } } struct DataVisitor ; impl < 'de > :: serde :: de :: Visitor < 'de > for DataVisitor { type Value = Data ; fn expecting (& self , formatter : & mut std :: fmt :: Formatter) -> std :: fmt :: Result { formatter . write_str ("struct Data") } fn visit_map < V > (self , mut map : V) -> Result < Data , V :: Error > where V : :: serde :: de :: MapAccess < 'de > , { $ (let mut $ field = None ;) * let mut id = None ; let mut count = None ; let mut apple_id = None ; while let Some (key) = map . next_key () ? { match key { Field :: id => { if id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: inventory :: id :: NAME)) ; } id = Some (map . next_value () ?) ; } Field :: count => { if count . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: inventory :: count :: NAME)) ; } count = Some (map . next_value () ?) ; } Field :: apple_id => { if apple_id . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: inventory :: apple_id :: NAME)) ; } apple_id = Some (map . next_value () ?) ; } $ (Field :: $ field => { if $ field . is_some () { return Err (:: serde :: de :: Error :: duplicate_field (crate :: prisma :: inventory :: $ field :: NAME)) ; } $ field = Some (map . next_value () ?) ; }) * } } $ (let $ field = $ field . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: inventory :: $ field :: NAME)) ? ;) * let id = id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: inventory :: id :: NAME)) ? ; let count = count . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: inventory :: count :: NAME)) ? ; let apple_id = apple_id . ok_or_else (|| serde :: de :: Error :: missing_field (crate :: prisma :: inventory :: apple_id :: NAME)) ? ; Ok (Data { id , count , apple_id , $ ($ field) , * }) } } const FIELDS : & 'static [& 'static str] = & ["id" , "apple" , "count" , "appleId"] ; deserializer . deserialize_struct ("Data" , FIELDS , DataVisitor) } } $ ($ (pub mod $ field { crate :: prisma :: inventory :: $ selection_mode ! (@ field_module ; $ field : $ selection_mode { $ ($ selections) + }) ; }) ?) + } ; (@ field_type ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { apple :: Data } ; (@ field_type ; apple) => { crate :: prisma :: apple :: Data } ; (@ field_type ; $ field : ident $ ($ tokens : tt) *) => { compile_error ! (stringify ! (Cannot include nonexistent relation $ field on model "Inventory" , available relations are "apple")) } ; (@ field_module ; apple : $ selection_mode : ident { $ ($ selections : tt) + }) => { crate :: prisma :: apple :: include ! (@ definitions ; ; $ ($ selections) +) ; } ; (@ field_module ; $ ($ tokens : tt) *) => { } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? : $ selection_mode : ident { $ ($ selections : tt) + }) => { { Into :: < crate :: prisma :: inventory :: IncludeParam > :: into (crate :: prisma :: inventory :: apple :: Include :: $ selection_mode (crate :: prisma :: apple :: select ! (@ selections_to_params ; : $ selection_mode { $ ($ selections) + }) . into_iter () . collect ())) } } ; (@ selection_field_to_selection_param ; apple $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ?) => { { Into :: < crate :: prisma :: inventory :: IncludeParam > :: into (crate :: prisma :: inventory :: apple :: Include :: Fetch) } } ; (@ selection_field_to_selection_param ; $ ($ tokens : tt) *) => { compile_error ! (stringify ! ($ ($ tokens) *)) } ; (@ selections_to_params ; : $ macro_name : ident { $ ($ field : ident $ (($ ($ filters : tt) +) $ (. $ arg : ident ($ ($ arg_params : tt) *)) *) ? $ (: $ selection_mode : ident { $ ($ selections : tt) + }) ?) + }) => { [$ (crate :: prisma :: inventory :: $ macro_name ! (@ selection_field_to_selection_param ; $ field $ (($ ($ filters) +) $ (. $ arg ($ ($ arg_params) *)) *) ? $ (: $ selection_mode { $ ($ selections) + }) ?) ,) +] } ; (@ filters_to_args ;) => { vec ! [] } ; (@ filters_to_args ; $ ($ t : tt) *) => { $ ($ t) * } ; (@ field_serde_name ; id) => { "id" } ; (@ field_serde_name ; apple) => { "apple" } ; (@ field_serde_name ; count) => { "count" } ; (@ field_serde_name ; apple_id) => { "appleId" } ; }
+    pub use _include_inventory as include;
     pub enum IncludeParam {
         Id(id::Include),
         Apple(apple::Include),
@@ -1158,8 +1156,8 @@ pub mod apple_count {
         }
     }
     #[macro_export]
-    macro_rules ! _partial_unchecked_apple_count { ($ struct_name : ident { $ ($ scalar_field : ident) + }) => { :: prisma_client_rust :: macros :: partial_unchecked ! { crate :: prisma :: apple_count struct $ struct_name { # [serde (rename = "id")] pub id : String , # [serde (rename = "count")] pub count : i32 , # [serde (rename = "appleId")] pub apple_id : String } [$ ($ scalar_field) , +] } } ; }
-    pub use _partial_unchecked_apple_count as partial_unchecked;
+    macro_rules ! _partial_unchecked_inventory { ($ struct_name : ident { $ ($ scalar_field : ident) + }) => { :: prisma_client_rust :: macros :: partial_unchecked ! { crate :: prisma :: inventory struct $ struct_name { # [serde (rename = "id")] pub id : String , # [serde (rename = "count")] pub count : i32 , # [serde (rename = "appleId")] pub apple_id : String } [$ ($ scalar_field) , +] } } ; }
+    pub use _partial_unchecked_inventory as partial_unchecked;
     #[derive(Debug, Clone, :: serde :: Serialize, :: serde :: Deserialize)]
     pub struct Data {
         #[serde(rename = "id")]
@@ -1589,8 +1587,8 @@ pub mod _prisma {
         pub fn apple(&self) -> super::apple::Actions {
             super::apple::Actions { client: &self.0 }
         }
-        pub fn apple_count(&self) -> super::apple_count::Actions {
-            super::apple_count::Actions { client: &self.0 }
+        pub fn inventory(&self) -> super::inventory::Actions {
+            super::inventory::Actions { client: &self.0 }
         }
     }
     impl ::prisma_client_rust::PrismaClient for PrismaClient {
@@ -1602,24 +1600,6 @@ pub mod _prisma {
         }
         fn with_tx_id(&self, tx_id: Option<::prisma_client_rust::query_core::TxId>) -> Self {
             Self(self.0.with_tx_id(tx_id))
-        }
-    }
-    #[derive(Debug, Clone, Copy, :: serde :: Serialize, :: serde :: Deserialize, PartialEq, Eq)]
-    pub enum AppleCountScalarFieldEnum {
-        #[serde(rename = "id")]
-        Id,
-        #[serde(rename = "count")]
-        Count,
-        #[serde(rename = "appleId")]
-        AppleId,
-    }
-    impl ToString for AppleCountScalarFieldEnum {
-        fn to_string(&self) -> String {
-            match self {
-                Self::Id => "id".to_string(),
-                Self::Count => "count".to_string(),
-                Self::AppleId => "appleId".to_string(),
-            }
         }
     }
     #[derive(Debug, Clone, Copy, :: serde :: Serialize, :: serde :: Deserialize, PartialEq, Eq)]
@@ -1637,6 +1617,24 @@ pub mod _prisma {
                 Self::Id => "id".to_string(),
                 Self::VarietyName => "varietyName".to_string(),
                 Self::Color => "color".to_string(),
+            }
+        }
+    }
+    #[derive(Debug, Clone, Copy, :: serde :: Serialize, :: serde :: Deserialize, PartialEq, Eq)]
+    pub enum InventoryScalarFieldEnum {
+        #[serde(rename = "id")]
+        Id,
+        #[serde(rename = "count")]
+        Count,
+        #[serde(rename = "appleId")]
+        AppleId,
+    }
+    impl ToString for InventoryScalarFieldEnum {
+        fn to_string(&self) -> String {
+            match self {
+                Self::Id => "id".to_string(),
+                Self::Count => "count".to_string(),
+                Self::AppleId => "appleId".to_string(),
             }
         }
     }

@@ -13,3 +13,4 @@ members = [
 [dependencies]
 serde = "1.0.193"
 prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.10", default-features = false, features = ["sqlite"] }
+tokio = { version = "1.35.1", features = ["full"] }
