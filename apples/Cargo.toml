@@ -1,0 +1,15 @@
+[package]
+name = "apples"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "prisma-cli",
+]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = "1.0.193"
+prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", tag = "0.6.10", default-features = false, features = ["sqlite"] }
