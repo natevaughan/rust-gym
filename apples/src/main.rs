@@ -24,10 +24,7 @@ async fn main() {
         Action::READ => {
             let stuff: Vec<inventory::Data> = client
             .inventory()
-            .find_many(vec![
-                inventory::id::lt("10".to_string())
-            ])
-
+            .find_many(vec![])
             .with(inventory::apple::fetch())
             .exec()
             .await
@@ -42,9 +39,43 @@ async fn main() {
             if args.len() < 5 {
                 panic!("Usage: CREATE <variety_name> <color> <inventory_count>");
             }
-            println!("Created apple {} {}", args[2], args[3]);
+            let apple = create_apple(&client, &args[2], &args[3]).await;
+            let inventory = create_inventory(&client, &apple.id, &args[4]).await;
+
+            println!("Created apple {} {} {}", apple.variety_name, apple.color, inventory.count);
         }
     }
+}
+
+async fn create_apple(client: &PrismaClient, name: &str, color: &str) -> apple::Data {
+    let apple = client
+                .apple()
+                .create(
+                    Uuid::new_v4().to_string(),
+                    name.to_string(),
+                    vec![
+                        apple::color::set(color.to_string()),
+                    ]
+                )
+                .exec()
+                .await;
+    apple.unwrap()
+}
+
+async fn create_inventory(client: &PrismaClient, apple_id: &str, count: &str) -> inventory::Data {
+    let count = count.parse::<i32>().expect("Invalid integer for count");
+    let inventory = client
+        .inventory()
+        .create(
+            Uuid::new_v4().to_string(),
+            apple::id::equals(apple_id.to_string()),
+            vec![
+                inventory::count::set(count),
+            ]
+        )
+        .exec()
+        .await;
+    inventory.unwrap()
 }
 
 #[derive(Debug)]
