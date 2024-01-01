@@ -13,21 +13,38 @@ async fn main() {
     }
 
     let action = parse_action(args[1].to_owned()).expect("Please select either \"create\" or \"read\" for the first agrument");
-    let client: Result<PrismaClient, NewClientError> = PrismaClient::_builder().build().await;
+    let client_res: Result<PrismaClient, NewClientError> = PrismaClient::_builder().build().await;
+    let client = client_res.expect("Error creating client");
 
-    let stuff: Vec<inventory::Data> = client.expect("REASON")
-    .inventory()
-    .find_many(vec![
-        inventory::id::lt("10".to_string())
-    ])
-    .exec()
-    .await
-    .unwrap();
+    match action {
+        Action::READ => {
+            let stuff: Vec<inventory::Data> = client
+            .inventory()
+            .find_many(vec![
+                inventory::id::lt("10".to_string())
+            ])
 
-    println!("{:?} {:?}", action, stuff)
+            .with(inventory::apple::fetch())
+            .exec()
+            .await
+            .unwrap();
+            println!("Here is the current inventory of apple varieties {:?}", stuff);
+            for inventory in stuff {
+                let apple = inventory.apple.unwrap();
+                println!("{} {} {}", inventory.count, apple.variety_name, apple.color);
+            }
+        }
+        Action::CREATE => {
+            if args.len() < 5 {
+                panic!("Usage: CREATE <variety_name> <color> <inventory_count>");
+            }
+            println!("Created apple {} {}", args[2], args[3]);
+        }
+    }
 }
 
 #[derive(Debug)]
+#[derive(Display)]
 enum Action {
     CREATE,
     READ
