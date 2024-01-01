@@ -1,9 +1,13 @@
 #[allow(warnings, unused)]
 mod prisma;
+#[macro_use]
+extern crate enum_display_derive;
 
 use std::env;
-use prisma::{PrismaClient, inventory};
+use prisma::{PrismaClient, inventory, apple};
 use prisma_client_rust::NewClientError;
+use uuid::Uuid;
+use std::fmt::Display;
  
 #[tokio::main]
 async fn main() {
