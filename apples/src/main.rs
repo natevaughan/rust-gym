@@ -22,18 +22,19 @@ async fn main() {
 
     match action {
         Action::READ => {
-            let stuff: Vec<inventory::Data> = client
-            .inventory()
-            .find_many(vec![])
-            .with(inventory::apple::fetch())
-            .exec()
-            .await
-            .unwrap();
-            println!("Here is the current inventory of apple varieties {:?}", stuff);
-            for inventory in stuff {
+            let all_inventory: Vec<inventory::Data> = client
+                .inventory()
+                .find_many(vec![])
+                .with(inventory::apple::fetch())
+                .exec()
+                .await
+                .unwrap();
+            println!("Here is the current inventory of apple varieties");
+            for inventory in all_inventory {
                 let apple = inventory.apple.unwrap();
                 println!("{} {} {}", inventory.count, apple.variety_name, apple.color);
             }
+            
         }
         Action::CREATE => {
             if args.len() < 5 {
