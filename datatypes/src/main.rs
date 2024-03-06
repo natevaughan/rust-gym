@@ -24,11 +24,20 @@ fn main() {
 		println!("Type of a in loop is: {} : {}", a, get_type_name(&a));
 	}
 	println!("Type of a after loop: {}", get_type_name(&a));
-	
+	let b = multiply_some_stuff(a, 3.5);
+	println!("b = a * 3.5 = {}", b);
+	println!("Type of b: {}", get_type_name(&b));
+	let c = multiply_some_stuff(2, 4);
+	println!("c = 2 * 4 = {}", c);
+	println!("Type of c: {}", get_type_name(&c));
 }
 
 fn here_is_some_stuff() -> (i32, f64) {
 	(20, 50.5)
+}
+
+fn multiply_some_stuff<T: std::ops::Mul<Output = T>>(first: T, second: T) -> T {
+	first * second
 }
 
 // source https://stackoverflow.com/questions/21747136/how-do-i-print-in-rust-the-type-of-a-variable
