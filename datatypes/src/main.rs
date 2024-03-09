@@ -44,3 +44,20 @@ fn multiply_some_stuff<T: std::ops::Mul<Output = T>>(first: T, second: T) -> T {
 fn get_type_name<T>(_: &T) -> String {
 	format!("{}", std::any::type_name::<T>())
 }
+
+// a few hacker rank challenges
+
+fn aVeryBigSum(ar: &[i64]) -> i64 {
+    ar.iter().sum()
+}
+
+fn diagonalDifference(arr: &[Vec<i32>]) -> i32 {
+    let ht = arr.len() - 1;
+    let mut fwd = 0;
+    let mut rev = 0;
+    for i in 0..=ht {
+        fwd += arr[i][i];
+        rev += arr[i][ht - i];
+    }
+    (fwd - rev).abs()
+}

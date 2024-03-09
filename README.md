@@ -10,6 +10,11 @@ Questions I'm exploring for further reading and exploration:
  - Where are different kinds of strings stored `String`, `&str`, `&'static str`? Heap, stack, ...?
  - Why do some impls reference `&self`` and others `self`?
 
- ## Notes
+## Checklist
 
- Currently on p20 of `rust-by-example.pdf`
+ - ✅ arr.iter() and iter.map()
+ - ✅ num.abs()
+
+## Notes
+
+Currently on p20 of `rust-by-example.pdf`
