@@ -1,5 +1,23 @@
 fn main() {
 	plus_minus(&[-2, 0, 3, 3]);
+	staircase(1);
+	staircase(2);
+	staircase(10);
+}
+
+fn staircase(n: i32) {
+	const HASH: &str = "#";
+	const SPACE: &str = " ";
+	for i in 1..=n {
+		let mut line = "".to_owned();
+		for j in 1..=(n - i) {
+			line.push_str(SPACE);	
+		}
+		for j in (n - i + 1)..=n { 
+			line.push_str(HASH);
+		}
+		println!("{}", line)
+	}
 }
 
 struct Counts {
