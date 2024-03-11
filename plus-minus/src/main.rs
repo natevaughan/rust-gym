@@ -10,10 +10,10 @@ fn staircase(n: i32) {
 	const SPACE: &str = " ";
 	for i in 1..=n {
 		let mut line = "".to_owned();
-		for j in 1..=(n - i) {
+		for _ in 1..=(n - i) {
 			line.push_str(SPACE);	
 		}
-		for j in (n - i + 1)..=n { 
+		for _ in (n - i + 1)..=n { 
 			line.push_str(HASH);
 		}
 		println!("{}", line)
