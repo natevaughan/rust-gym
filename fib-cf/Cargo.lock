@@ -116,6 +116,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "fib-cf"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "worker",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -741,14 +749,6 @@ dependencies = [
  "wasm-bindgen-futures",
  "wasm-bindgen-macro-support",
  "worker-sys",
-]
-
-[[package]]
-name = "worker-rust"
-version = "0.1.0"
-dependencies = [
- "serde",
- "worker",
 ]
 
 [[package]]
