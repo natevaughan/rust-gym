@@ -32,10 +32,12 @@ fn main() {
     let c = Chimpanzee{name: "Lola".to_string()};
     let j = Jellyfish{};
     let animals: Vec<Box<dyn Animal>> = vec![Box::new(c), Box::new(j)];   
-    let_the_animals_speak(animals) 
+    let_the_animals_speak(&animals);
+    println!("One more time please!");
+    let_the_animals_speak(&animals)
 }
 
-fn let_the_animals_speak(v: Vec<Box<dyn Animal>>) {
+fn let_the_animals_speak(v: &Vec<Box<dyn Animal>>) {
     for a in v.into_iter() {
         println!("{}", a.speak())
     }
