@@ -1,22 +1,24 @@
-use std::fmt;
 
-fn main() {
-    let ape = 0b111101;
-    println!("The chimpanzee is {} years old", ape);
-    let orang = 0x3b3;
-    println!("The orangutan has {} sticks in his collection", orang);
-    println!("The matrix is\n{}", Matrix(1.5, 2.5, 3.5, 4.5))
+struct Chimpanzee {
+    name: String
 }
 
-struct Matrix(f64, f64, f64, f64);
+trait Animal {
+    fn name(&self) -> &str;
+    fn speak(&self);
+}
 
-impl fmt::Display for Matrix {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let Matrix(tl, tr, bl, br) = self;
-        write!(f, "({}, {})\n({}, {})", tl, tr, bl, br)
+impl Animal for Chimpanzee {
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn speak(&self) {
+        println!("A Chimpanzee named {} says Ooooo oooo eeeeee eeeee!!!", &self.name)
     }
 }
 
-fn transpose(m: Matrix) -> Matrix {
-    
+fn main() {
+    let c = Chimpanzee{name: "Lola".to_string()};
+    c.speak();
 }
