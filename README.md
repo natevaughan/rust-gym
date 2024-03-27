@@ -12,7 +12,13 @@ Questions I'm exploring for further reading and exploration:
     - `String` -> heap and ownership is checked
  - Why do some impls reference `&self`` and others `self`?
 
-## Checklist
+## To practice
+ - Indexing into array must be `usize`, not `i32`
+ - Various ways of looping over arrays and vecs (.map, iter(), borrow)
+ - Mutating arrays in place
+ - Creating an array filled with a specific value
+
+## Done
 
  - ✅ `arr.iter()` and `iter.map()`
  - ✅ number basics like `num.abs()`, `num_str.parse::<i32>().unwrap()`
