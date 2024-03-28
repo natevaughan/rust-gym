@@ -13,6 +13,11 @@ Questions I'm exploring for further reading and exploration:
  - Why do some impls reference `&self`` and others `self`?
 
 ## To practice
+ - count characters in a string and return an arr of counts of letters of either case
+    - can you return a borrowed array? Owned array? Only a heap vec? Boxed array?
+ - find and extract all the ints in an array. Return an array with only those numbers.
+ - iterate over a vec twice, once to print it and once to print it in reverse
+ [x] fill a vec with n characters, where n is the letter of the alphabet sequence
  - Indexing into array must be `usize`, not `i32`
  - Various ways of looping over arrays and vecs (.map, iter(), borrow)
  - Mutating arrays in place
