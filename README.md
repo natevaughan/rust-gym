@@ -22,6 +22,7 @@ Questions I'm exploring for further reading and exploration:
  - Various ways of looping over arrays and vecs (.map, iter(), borrow)
  - Mutating arrays in place
  - Creating an array filled with a specific value
+ - .map_ok and .map_err for result
 
 ## Done
 
